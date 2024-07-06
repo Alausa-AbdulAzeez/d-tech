@@ -1,0 +1,21 @@
+.nav__button {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  text-wrap: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 8px;
+  color: var(--blue-100);
+  cursor: pointer;
+  padding: 8px 8px;
+  transition: all ease-in-out 200ms;
+}
+
+.nav__button:hover {
+  border-radius: 4px;
+  background: var(--blue-20);
+  opacity: 0.7;
+  transform: scale(0.95);
+}

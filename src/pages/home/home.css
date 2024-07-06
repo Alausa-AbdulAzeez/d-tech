@@ -1,0 +1,7 @@
+.home {
+  height: 100vh;
+  background: var(--neutral-bg);
+  overflow: auto;
+  position: relative;
+  margin: 0 auto;
+}

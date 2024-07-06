@@ -1,0 +1,122 @@
+.resume__upload {
+}
+.no__resume__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.ghost__image__no__resume {
+  width: 180px;
+  height: auto;
+  margin-bottom: 8px;
+}
+.click__upload__button__arrow__pointer {
+  height: 30px;
+  margin: 12px 0px;
+}
+
+.resume__upload__button {
+  border: none;
+  transition: all ease-in-out 160ms;
+}
+.resume__upload__button__mask,
+.choose__another__resume__button__mask {
+  border: none;
+  background: var(--blue-100);
+  display: flex;
+  align-items: center;
+  text-wrap: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 8px;
+  color: var(--off-white);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px 8px;
+
+  width: 100px;
+  justify-content: center;
+}
+
+.resume__upload__button:hover,
+.choose__another__resume__button:hover {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+.resume__upload__button > label {
+  cursor: pointer;
+}
+
+#fileInputMain,
+#chooseDifferentFile {
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+.selected__resume__info {
+  font-size: 12px;
+  font-weight: 700;
+  color: darkgray;
+  text-align: center;
+}
+
+.yes_resume__container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resume__holder {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  background: var(--neutral-bg);
+  border: 1px solid var(--light-border-color);
+  cursor: pointer;
+  padding: 16px;
+  border-radius: 8px;
+  transition: all ease-in-out 200ms;
+}
+
+.resume__holder:hover {
+  opacity: 0.7;
+  border: 1px solid silver;
+}
+
+.resume__holder__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.resume__holder__file__icon {
+  width: 20px;
+  height: 20px;
+}
+.resume__holder__file__name {
+  font-size: 14px;
+  font-weight: 500;
+}
+.resume__holder__delete__file__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.choose__another__resume__button {
+  border: none;
+  width: fit-content;
+  transition: all ease-in-out 160ms;
+}
+
+.choose__another__resume__button__mask {
+  width: auto;
+  color: var(--blue-100);
+  background: var(--off-white);
+}
+
+.choose__another__resume__button__mask:hover {
+  background: var(--blue-20);
+}
