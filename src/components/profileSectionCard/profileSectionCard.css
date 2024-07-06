@@ -37,10 +37,20 @@
 .profile__section__card__completion__status {
   margin: 0;
   font-size: 12px;
+}
+
+.profile__section__card__completion__status.Completed {
   color: var(--green-100);
+}
+.profile__section__card__completion__status.Incomplete {
+  color: var(--red-100);
 }
 
 .done__icon {
   color: var(--green-100);
+  font-weight: 800;
+}
+.not__done__icon {
+  color: var(--red-100);
   font-weight: 800;
 }

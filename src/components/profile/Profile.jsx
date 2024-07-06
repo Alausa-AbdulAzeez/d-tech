@@ -10,11 +10,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PersonalDetailsForm from "../personalDetailsForm/PersonalDetailsForm";
 
 const Profile = () => {
-  // profile sections
   const profileSections = [
     { title: "Resume", profileIndex: 1 },
     { title: "Personal details", profileIndex: 2 },
-    { title: "Professeional experience", profileIndex: 3 },
+    { title: "Professional experience", profileIndex: 3 },
   ];
 
   const location = useLocation();
@@ -27,6 +26,7 @@ const Profile = () => {
   };
 
   const [activeSection, setActiveSection] = useState(getSectionFromQuery);
+  const [completionStatus, setCompletionStatus] = useState({});
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -38,13 +38,20 @@ const Profile = () => {
     setActiveSection(section);
   };
 
+  const setSectionCompletion = (sectionTitle, isComplete) => {
+    setCompletionStatus((prevStatus) => ({
+      ...prevStatus,
+      [sectionTitle]: isComplete,
+    }));
+  };
+
   return (
     <div className="profile__container">
       <h3 className="your__profile__text">Your profile</h3>
       <div className="profile__content__container">
         <div className="profile__content__left">
           {profileSections?.map((profileSection) => {
-            const { profileIndex } = profileSection;
+            const { profileIndex, title } = profileSection;
 
             return (
               <ProfileSectionCard
@@ -52,6 +59,7 @@ const Profile = () => {
                 profileSection={profileSection}
                 isActive={profileIndex === activeSection.profileIndex}
                 onClick={() => handleSectionClick(profileSection)}
+                isComplete={completionStatus[title]}
               />
             );
           })}
@@ -69,7 +77,13 @@ const Profile = () => {
             </div>
           </div>
           <div>
-            {activeSection.title === "Resume" && <ResumeUpload />}
+            {activeSection.title === "Resume" && (
+              <ResumeUpload
+                setCompletionStatus={(isComplete) =>
+                  setSectionCompletion("Resume", isComplete)
+                }
+              />
+            )}
             {activeSection.title === "Personal details" && (
               <PersonalDetailsForm />
             )}

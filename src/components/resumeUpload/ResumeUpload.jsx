@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { arrowDown, ghost } from "../../assets/images";
 import { ToastContainer, toast } from "react-toastify";
 import { Icon } from "@iconify/react";
 import "./resumeUpload.css";
 
-const ResumeUpload = () => {
-  // Resume uploaded state (Mock)
+const ResumeUpload = ({ setCompletionStatus }) => {
   const [resume, setResume] = useState(false);
-
-  //   Selected resume state
   const [selectedResume, setSelectedResume] = useState(null);
 
-  // Function to handle file upload
+  useEffect(() => {
+    const storedResume = JSON.parse(localStorage.getItem("resume"));
+    if (storedResume) {
+      setSelectedResume(storedResume);
+      setResume(true);
+      setCompletionStatus(true);
+    } else {
+      setCompletionStatus(false);
+    }
+  }, []);
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const allowedExtensions = [".pdf", ".doc", ".docx"];
@@ -19,9 +26,17 @@ const ResumeUpload = () => {
 
     if (file && allowedExtensions.includes(`.${fileExtension}`)) {
       if (file.size < 10 * 1024 * 1024) {
-        // Check if file size is less than 10MB
         setSelectedResume(file);
         setResume(true);
+        // Extract necessary file properties
+        const fileData = {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          lastModified: file.lastModified,
+        };
+        localStorage.setItem("resume", JSON.stringify(fileData));
+        setCompletionStatus(true);
       } else {
         toast.error("File size should be less than 10MB", {
           position: "top-center",
@@ -47,17 +62,15 @@ const ResumeUpload = () => {
       });
     }
 
-    // Reset the file input value
     event.target.value = null;
   };
-  //   End of function to handle file change
 
-  // Function to remove file
   const removeFile = () => {
     setResume(false);
     setSelectedResume(null);
+    localStorage.removeItem("resume");
+    setCompletionStatus(false);
   };
-  // End of unction to remove file
 
   return (
     <div className="resume__upload">
@@ -73,7 +86,6 @@ const ResumeUpload = () => {
           <p className="click__button__to__upload__text">
             Click the button below to choose
           </p>
-
           <img
             src={arrowDown}
             alt="arrow down"
@@ -135,7 +147,6 @@ const FileHolder = ({ file, handleClick }) => {
           />
           <div className={`resume__holder__file__name`}>{file?.name}</div>
         </div>
-
         <Icon
           icon="ion:trash-sharp"
           color="#F04037"
