@@ -107,6 +107,16 @@ const Profile = () => {
           state = false;
         }
         return state;
+      case "Professional experience":
+        const storedProfessionalExperience = JSON.parse(
+          localStorage.getItem("Professional experience")
+        );
+        if (storedProfessionalExperience.length > 0) {
+          state = true;
+        } else {
+          state = false;
+        }
+        return state;
       default:
         break;
     }

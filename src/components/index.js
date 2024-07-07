@@ -8,6 +8,7 @@ import SectionCTA from "./sectionCTA/SectionCTA";
 import SkillsAndTools from "./skillsAndTools/SkillsAndTools";
 import LoadingComponent from "./loadingComponent/LoadingComponent";
 import SingleWorkHistory from "./singleWorkHistory/SingleWorkHistory";
+import MainProfessionalExperienceForm from "./mainProfessionalExperienceForm/MainProfessionalExperienceForm";
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   SkillsAndTools,
   LoadingComponent,
   SingleWorkHistory,
+  MainProfessionalExperienceForm,
 };

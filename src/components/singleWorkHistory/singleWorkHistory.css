@@ -62,6 +62,7 @@
   overflow: hidden; /* Ensures that the content that overflows is not visible */
   text-overflow: ellipsis; /* Adds the ellipsis (...) */
   max-width: 300px;
+  font-size: 12px;
 }
 
 .single__work__history__right__content__bottom {
