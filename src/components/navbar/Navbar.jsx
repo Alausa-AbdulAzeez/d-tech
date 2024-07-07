@@ -1,29 +1,27 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import "./navbar.css";
+import { UserContext } from "../../pages/home/Home";
 
 const Navbar = () => {
-  const [userDetails, setUserDetails] = useState(
-    JSON.parse(localStorage.getItem("Personal details"))
-  );
+  const { userDetails } = useContext(UserContext);
 
-  useEffect(() => {
-    setUserDetails(JSON.parse(localStorage.getItem("Personal details")));
-  }, [localStorage.getItem("Personal details")]);
+  const { firstname, surname, jobtitle } = userDetails;
 
   return (
     <nav className="navbar">
       <h2 className="nav__logo">D-Tech</h2>
       <div className="nav__profile__container">
-        <div className="nav__profile__container__left">AA</div>
+        <div className="nav__profile__container__left">
+          {firstname[0]?.toUpperCase()}
+          {surname[0]?.toUpperCase()}
+        </div>
         <div className="nav__profile__container__right">
           <h3 className="nav__profile__container__right__top">
-            {userDetails?.firstname && userDetails.surname
-              ? `${userDetails?.firstname} ${userDetails.surname}`
-              : "Username"}{" "}
+            {firstname && surname ? `${firstname} ${surname}` : "Username"}
           </h3>
-          <p className="nav__profile__container__right__bottom">
-            Software developer
-          </p>
+          {jobtitle && (
+            <p className="nav__profile__container__right__bottom">{jobtitle}</p>
+          )}
         </div>
       </div>
     </nav>

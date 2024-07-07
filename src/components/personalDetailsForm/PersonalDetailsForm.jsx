@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./personalDetailsForm.css";
 import Select from "react-select";
 import SectionCTA from "../sectionCTA/SectionCTA";
 import { ToastContainer, toast } from "react-toastify";
 import LoadingComponent from "../loadingComponent/LoadingComponent";
+import { UserContext } from "../../pages/home/Home";
 
 /**
  * PersonalDetailsForm component renders a form for collecting personal details.
@@ -18,6 +19,8 @@ import LoadingComponent from "../loadingComponent/LoadingComponent";
  * @param {Function} props.setCompletionStatus - Function to set the completion status of the profile section.
  */
 const PersonalDetailsForm = ({ setCompletionStatus }) => {
+  const { setUserDetails } = useContext(UserContext);
+
   // State variables to control the Select component properties
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
@@ -76,6 +79,7 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value.trim() }));
+    setUserDetails({ ...formData, [name]: value });
     // Update localStorage with new data
     localStorage.setItem(
       "Personal details",
@@ -113,7 +117,7 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
     e.preventDefault();
     if (validateForm()) {
       setCompletionStatus(true); // Set completion status to true if form is valid
-      toast.success("Form submitted successfully", {
+      toast.success("Form saved successfully", {
         position: "top-center",
         autoClose: 2500,
         hideProgressBar: false,
