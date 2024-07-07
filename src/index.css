@@ -81,6 +81,11 @@ input.warn {
   color: var(--red-100);
 }
 
+.CTA__button__container {
+  display: flex;
+  justify-content: end;
+}
+
 /* Define a container class */
 .app__container {
   max-width: 1280px !important;

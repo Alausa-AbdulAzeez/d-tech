@@ -66,6 +66,37 @@ const Profile = () => {
   //   }
   // },[])
 
+  // Function to check the complete state of a section
+  const checkCompleteState = (title) => {
+    let state;
+    switch (title) {
+      case "Resume":
+        state = localStorage.getItem(title);
+        return state;
+      case "Personal details":
+        const storedPersonalDetails = JSON.parse(
+          localStorage.getItem("Personal details")
+        );
+        if (
+          storedPersonalDetails.firstname &&
+          storedPersonalDetails.surname &&
+          storedPersonalDetails.email &&
+          storedPersonalDetails.phone &&
+          storedPersonalDetails.jobtitle &&
+          storedPersonalDetails.gender &&
+          storedPersonalDetails.country
+        ) {
+          state = true;
+        } else {
+          state = false;
+        }
+        return state;
+      default:
+        break;
+    }
+  };
+  // End ofunction to check the complete state of a section
+
   return (
     <div className="profile__container">
       <h3 className="your__profile__text">Your profile</h3>
@@ -80,7 +111,7 @@ const Profile = () => {
                 profileSection={profileSection}
                 isActive={profileIndex === activeSection.profileIndex}
                 onClick={() => handleSectionClick(profileSection)}
-                isComplete={localStorage.getItem([title])}
+                isComplete={checkCompleteState(title)}
               />
             );
           })}

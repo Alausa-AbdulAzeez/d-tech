@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./personalDetailsForm.css";
 import Select from "react-select";
+import SectionCTA from "../sectionCTA/SectionCTA";
+import { ToastContainer, toast } from "react-toastify";
 
 /**
  * PersonalDetailsForm component renders a form for collecting personal details.
@@ -71,7 +73,7 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
   // Handle change for text inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData((prevData) => ({ ...prevData, [name]: value.trim() }));
     // Update localStorage with new data
     localStorage.setItem(
       "Personal details",
@@ -107,9 +109,19 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(validateForm());
     if (validateForm()) {
       setCompletionStatus(true); // Set completion status to true if form is valid
-      console.log("Form submitted successfully", formData);
+      toast.success("Form submitted successfully", {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       // You can add more logic here to handle the form submission, such as sending the data to a server
     } else {
       setCompletionStatus(false); // Set completion status to false if form is invalid
@@ -119,6 +131,7 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
 
   return (
     <form className="personal__details__container" onSubmit={handleSubmit}>
+      <ToastContainer />
       <div className="personal__details__single__line__container">
         {/* Firstname Input */}
         <div className="personal__details__single__input__container">
@@ -214,19 +227,38 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
           <label htmlFor="gender" className="input__label">
             Gender <span>*</span>
           </label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            value={formData?.gender?.label}
-            isDisabled={isDisabled}
-            isLoading={isLoading}
-            isClearable={isClearable}
-            isRtl={isRtl}
-            isSearchable={isSearchable}
-            name="gender"
-            options={genders}
-            onChange={handleSelectChange}
-          />
+          {formData?.gender?.value && (
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue={{
+                label: formData?.gender?.label,
+                value: formData?.gender?.value,
+              }}
+              isDisabled={isDisabled}
+              isLoading={isLoading}
+              isClearable={isClearable}
+              isRtl={isRtl}
+              isSearchable={isSearchable}
+              name="gender"
+              options={genders}
+              onChange={handleSelectChange}
+            />
+          )}
+          {!formData.gender?.value && (
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              isDisabled={isDisabled}
+              isLoading={isLoading}
+              isClearable={isClearable}
+              isRtl={isRtl}
+              isSearchable={isSearchable}
+              name="gender"
+              options={genders}
+              onChange={handleSelectChange}
+            />
+          )}
           {errors.gender && (
             <p className="input__error__message">{errors.gender}</p>
           )}
@@ -256,14 +288,28 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
               onChange={handleSelectChange}
             />
           )}
+          {!formData.country?.value && (
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              isDisabled={isDisabled}
+              isLoading={isLoading}
+              isClearable={isClearable}
+              isRtl={isRtl}
+              isSearchable={isSearchable}
+              name="country"
+              options={colourOptions}
+              onChange={handleSelectChange}
+            />
+          )}
           {errors.country && (
             <p className="input__error__message">{errors.country}</p>
           )}
         </div>
       </div>
-      <button type="submit" className="submit__button">
-        Submit
-      </button>
+      <div className="CTA__button__container personal__details__CTA__button__container">
+        <SectionCTA text={"Save"} handleClick={handleSubmit} />
+      </div>
     </form>
   );
 };
