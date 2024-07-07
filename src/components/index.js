@@ -5,6 +5,7 @@ import ResumeUpload from "./resumeUpload/ResumeUpload";
 import ProfessionalExperienceForm from "./professionalExperienceForm/ProfessionalExperienceForm";
 import NavButton from "./navButton/NavButton";
 import SectionCTA from "./sectionCTA/SectionCTA";
+import SkillsAndTools from "./skillsAndTools/SkillsAndTools";
 
 export {
   Navbar,
@@ -14,4 +15,5 @@ export {
   ResumeUpload,
   NavButton,
   SectionCTA,
+  SkillsAndTools,
 };

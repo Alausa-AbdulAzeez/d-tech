@@ -4,6 +4,7 @@ import {
   ProfessionalExperienceForm,
   ResumeUpload,
   NavButton,
+  SkillsAndTools,
 } from "../index";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -14,6 +15,7 @@ const Profile = () => {
     { title: "Resume", profileIndex: 1 },
     { title: "Personal details", profileIndex: 2 },
     { title: "Professional experience", profileIndex: 3 },
+    { title: "Skills & Tools", profileIndex: 4 },
   ];
 
   const location = useLocation();
@@ -91,6 +93,16 @@ const Profile = () => {
           state = false;
         }
         return state;
+      case "Skills & Tools":
+        const storedSkillsAndTools = JSON.parse(
+          localStorage.getItem("Skills & Tools")
+        );
+        if (storedSkillsAndTools.primarySkills.length > 0) {
+          state = true;
+        } else {
+          state = false;
+        }
+        return state;
       default:
         break;
     }
@@ -140,6 +152,13 @@ const Profile = () => {
               <PersonalDetailsForm
                 setCompletionStatus={(isComplete) =>
                   setSectionCompletion("Personal details", isComplete)
+                }
+              />
+            )}
+            {activeSection.title === "Skills & Tools" && (
+              <SkillsAndTools
+                setCompletionStatus={(isComplete) =>
+                  setSectionCompletion("Skills & Tools", isComplete)
                 }
               />
             )}

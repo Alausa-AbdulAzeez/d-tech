@@ -109,7 +109,6 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(validateForm());
     if (validateForm()) {
       setCompletionStatus(true); // Set completion status to true if form is valid
       toast.success("Form submitted successfully", {

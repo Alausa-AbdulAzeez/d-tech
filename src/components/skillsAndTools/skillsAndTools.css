@@ -1,0 +1,9 @@
+.skills__and__tools__container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.skills__and__tools__single__input__container {
+  /* width: 48%; */
+  flex: 1;
+}
