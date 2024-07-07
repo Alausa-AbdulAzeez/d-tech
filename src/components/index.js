@@ -4,6 +4,7 @@ import ProfileSectionCard from "./profileSectionCard/ProfileSectionCard";
 import ResumeUpload from "./resumeUpload/ResumeUpload";
 import ProfessionalExperienceForm from "./professionalExperienceForm/ProfessionalExperienceForm";
 import NavButton from "./navButton/NavButton";
+import SectionCTA from "./sectionCTA/SectionCTA";
 
 export {
   Navbar,
@@ -12,4 +13,5 @@ export {
   ProfessionalExperienceForm,
   ResumeUpload,
   NavButton,
+  SectionCTA,
 };

@@ -43,7 +43,28 @@ const Profile = () => {
       ...prevStatus,
       [sectionTitle]: isComplete,
     }));
+
+    // localStorage.setItem(
+    //   "completionStatus",
+    //   JSON.stringify({
+    //     ...completionStatus,
+    //     [sectionTitle]: isComplete,
+    //   })
+    // );
   };
+
+  // useEffect(()=>{
+  //   const storedCompletionStatus = JSON.parse(
+  //     localStorage.getItem("completionStatus")
+  //   );
+  //   if (storedCompletionStatus) {
+  //     setSelectedResume(storedResume);
+  //     setResume(true);
+  //     setCompletionStatus(true);
+  //   } else {
+  //     setCompletionStatus(false);
+  //   }
+  // },[])
 
   return (
     <div className="profile__container">
@@ -59,7 +80,7 @@ const Profile = () => {
                 profileSection={profileSection}
                 isActive={profileIndex === activeSection.profileIndex}
                 onClick={() => handleSectionClick(profileSection)}
-                isComplete={completionStatus[title]}
+                isComplete={localStorage.getItem([title])}
               />
             );
           })}
@@ -85,7 +106,11 @@ const Profile = () => {
               />
             )}
             {activeSection.title === "Personal details" && (
-              <PersonalDetailsForm />
+              <PersonalDetailsForm
+                setCompletionStatus={(isComplete) =>
+                  setSectionCompletion("Personal details", isComplete)
+                }
+              />
             )}
             {activeSection.title === "Professional experience" && (
               <ProfessionalExperienceForm />

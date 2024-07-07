@@ -120,3 +120,8 @@
 .choose__another__resume__button__mask:hover {
   background: var(--blue-20);
 }
+
+.CTA__button__container {
+  display: flex;
+  justify-content: end;
+}

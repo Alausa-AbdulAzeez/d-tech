@@ -1,0 +1,19 @@
+.personal__details__container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.personal__details__single__line__container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+.personal__details__single__input__container {
+  /* width: 48%; */
+  flex: 1;
+}
+.basic-single {
+  /* width: 48%; */
+  flex: 1;
+}

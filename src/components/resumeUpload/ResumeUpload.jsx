@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { arrowDown, ghost } from "../../assets/images";
 import { ToastContainer, toast } from "react-toastify";
 import { Icon } from "@iconify/react";
+import { SectionCTA } from "../index";
 import "./resumeUpload.css";
 
 const ResumeUpload = ({ setCompletionStatus }) => {
@@ -9,7 +10,7 @@ const ResumeUpload = ({ setCompletionStatus }) => {
   const [selectedResume, setSelectedResume] = useState(null);
 
   useEffect(() => {
-    const storedResume = JSON.parse(localStorage.getItem("resume"));
+    const storedResume = JSON.parse(localStorage.getItem("Resume"));
     if (storedResume) {
       setSelectedResume(storedResume);
       setResume(true);
@@ -35,8 +36,7 @@ const ResumeUpload = ({ setCompletionStatus }) => {
           size: file.size,
           lastModified: file.lastModified,
         };
-        localStorage.setItem("resume", JSON.stringify(fileData));
-        setCompletionStatus(true);
+        localStorage.setItem("Resume", JSON.stringify(fileData));
       } else {
         toast.error("File size should be less than 10MB", {
           position: "top-center",
@@ -68,9 +68,35 @@ const ResumeUpload = ({ setCompletionStatus }) => {
   const removeFile = () => {
     setResume(false);
     setSelectedResume(null);
-    localStorage.removeItem("resume");
+    localStorage.removeItem("Resume");
     setCompletionStatus(false);
+    toast.success("File has been successfully removed", {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
+
+  // Function to handle resume upload
+  const uploadResume = () => {
+    setCompletionStatus(true);
+    toast.success("File has been successfully uploaded", {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  // End of function to handle resume upload
 
   return (
     <div className="resume__upload">
@@ -129,6 +155,9 @@ const ResumeUpload = ({ setCompletionStatus }) => {
               Select a different resume
             </label>
           </button>
+          <div className="CTA__button__container">
+            <SectionCTA text={"Save"} handleClick={uploadResume} />
+          </div>
         </div>
       )}
     </div>
