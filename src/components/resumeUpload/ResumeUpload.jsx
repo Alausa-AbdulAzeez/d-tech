@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { arrowDown, ghost } from "../../assets/images";
 import { ToastContainer, toast } from "react-toastify";
 import { Icon } from "@iconify/react";
-import { SectionCTA } from "../index";
+import { LoadingComponent, SectionCTA } from "../index";
 import "./resumeUpload.css";
 
 const ResumeUpload = ({ setCompletionStatus }) => {
   const [resume, setResume] = useState(false);
   const [selectedResume, setSelectedResume] = useState(null);
+  const [isPageLoading, setIsPageLoading] = useState(true); // Set initial loading state to true
 
   useEffect(() => {
     const storedResume = JSON.parse(localStorage.getItem("Resume"));
@@ -97,6 +98,21 @@ const ResumeUpload = ({ setCompletionStatus }) => {
     });
   };
   // End of function to handle resume upload
+
+  // Simulate loading for seconds
+  useEffect(() => {
+    setTimeout(() => {
+      setIsPageLoading(false);
+    }, 1000);
+  }, []);
+
+  if (isPageLoading) {
+    return (
+      <div className="loading__container">
+        <LoadingComponent style={{ width: 150, height: 50 }} />
+      </div>
+    );
+  }
 
   return (
     <div className="resume__upload">

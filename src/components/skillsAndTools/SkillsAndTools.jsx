@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./skillsAndTools.css";
 import Select from "react-select";
 import SectionCTA from "../sectionCTA/SectionCTA";
+import { LoadingComponent } from "../index";
 import { ToastContainer, toast } from "react-toastify";
 
 const SkillsAndTools = ({ setCompletionStatus }) => {
@@ -10,6 +11,7 @@ const SkillsAndTools = ({ setCompletionStatus }) => {
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true); // Set initial loading state to true
   const [isRtl, setIsRtl] = useState(false);
 
   // State variables to hold form data
@@ -100,78 +102,95 @@ const SkillsAndTools = ({ setCompletionStatus }) => {
     );
   };
 
+  // Simulate loading for seconds
+  useEffect(() => {
+    setTimeout(() => {
+      setIsPageLoading(false);
+    }, 1000);
+  }, []);
+
+  if (isPageLoading) {
+    return (
+      <div className="loading__container">
+        <LoadingComponent style={{ width: 150, height: 50 }} />
+      </div>
+    );
+  }
+
   return (
-    <form className="skills__and__tools__container">
+    <>
       <ToastContainer />
-      <div className="skills__and__tools__single__input__container">
-        <label htmlFor="" className="input__label">
-          Primary skills <span>*</span>
-        </label>
+      <form className="skills__and__tools__container">
+        <div className="skills__and__tools__single__input__container">
+          <label htmlFor="" className="input__label">
+            Primary skills <span>*</span>
+          </label>
 
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          isMulti
-          value={formData.primarySkills}
-          isDisabled={isDisabled}
-          isLoading={isLoading}
-          isClearable={isClearable}
-          isRtl={isRtl}
-          isSearchable={isSearchable}
-          name="primarySkills"
-          options={primarySkills}
-          onChange={handleSelectChange}
-        />
-        {errors.primarySkills && (
-          <p className="input__error__message">{errors.primarySkills}</p>
-        )}
-      </div>
+          <Select
+            className="basic-single"
+            classNamePrefix="select"
+            isMulti
+            value={formData.primarySkills}
+            isDisabled={isDisabled}
+            isLoading={isLoading}
+            isClearable={isClearable}
+            isRtl={isRtl}
+            isSearchable={isSearchable}
+            name="primarySkills"
+            options={primarySkills}
+            onChange={handleSelectChange}
+          />
+          {errors.primarySkills && (
+            <p className="input__error__message">{errors.primarySkills}</p>
+          )}
+        </div>
 
-      <div className="skills__and__tools__single__input__container">
-        <label htmlFor="" className="input__label">
-          Secondary skills
-        </label>
+        <div className="skills__and__tools__single__input__container">
+          <label htmlFor="" className="input__label">
+            Secondary skills
+          </label>
 
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          isMulti
-          value={formData.secondarySkills}
-          isDisabled={isDisabled}
-          isLoading={isLoading}
-          isClearable={isClearable}
-          isRtl={isRtl}
-          isSearchable={isSearchable}
-          name="secondarySkills"
-          options={secondarySkills}
-          onChange={handleSelectChange}
-        />
-      </div>
+          <Select
+            className="basic-single"
+            classNamePrefix="select"
+            isMulti
+            value={formData.secondarySkills}
+            isDisabled={isDisabled}
+            isLoading={isLoading}
+            isClearable={isClearable}
+            isRtl={isRtl}
+            isSearchable={isSearchable}
+            name="secondarySkills"
+            options={secondarySkills}
+            onChange={handleSelectChange}
+          />
+        </div>
 
-      <div className="skills__and__tools__single__input__container">
-        <label htmlFor="" className="input__label">
-          Tools
-        </label>
+        <div className="skills__and__tools__single__input__container">
+          <label htmlFor="" className="input__label">
+            Tools
+          </label>
 
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          isMulti
-          value={formData.tools}
-          isDisabled={isDisabled}
-          isLoading={isLoading}
-          isClearable={isClearable}
-          isRtl={isRtl}
-          isSearchable={isSearchable}
-          name="tools"
-          options={tools}
-          onChange={handleSelectChange}
-        />
-      </div>
-      <div className="CTA__button__container ">
-        <SectionCTA text={"Save"} handleClick={handleSubmit} />
-      </div>
-    </form>
+          <Select
+            className="basic-single"
+            classNamePrefix="select"
+            isMulti
+            value={formData.tools}
+            isDisabled={isDisabled}
+            isLoading={isLoading}
+            isClearable={isClearable}
+            isRtl={isRtl}
+            isSearchable={isSearchable}
+            name="tools"
+            options={tools}
+            onChange={handleSelectChange}
+          />
+        </div>
+        <div className="CTA__button__container ">
+          <SectionCTA text={"Save"} handleClick={handleSubmit} />
+        </div>
+      </form>
+    </>
   );
 };
 

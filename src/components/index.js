@@ -6,6 +6,7 @@ import ProfessionalExperienceForm from "./professionalExperienceForm/Professiona
 import NavButton from "./navButton/NavButton";
 import SectionCTA from "./sectionCTA/SectionCTA";
 import SkillsAndTools from "./skillsAndTools/SkillsAndTools";
+import LoadingComponent from "./loadingComponent/LoadingComponent";
 
 export {
   Navbar,
@@ -16,4 +17,5 @@ export {
   NavButton,
   SectionCTA,
   SkillsAndTools,
+  LoadingComponent,
 };

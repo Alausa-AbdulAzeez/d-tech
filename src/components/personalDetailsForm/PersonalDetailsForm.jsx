@@ -3,6 +3,7 @@ import "./personalDetailsForm.css";
 import Select from "react-select";
 import SectionCTA from "../sectionCTA/SectionCTA";
 import { ToastContainer, toast } from "react-toastify";
+import LoadingComponent from "../loadingComponent/LoadingComponent";
 
 /**
  * PersonalDetailsForm component renders a form for collecting personal details.
@@ -23,6 +24,7 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true); // Set initial loading state to true
 
   // State variables to hold form data
   const [formData, setFormData] = useState({
@@ -128,188 +130,205 @@ const PersonalDetailsForm = ({ setCompletionStatus }) => {
     }
   };
 
+  // Simulate loading for seconds
+  useEffect(() => {
+    setTimeout(() => {
+      setIsPageLoading(false);
+    }, 1000);
+  }, []);
+
+  if (isPageLoading) {
+    return (
+      <div className="loading__container">
+        <LoadingComponent style={{ width: 150, height: 50 }} />
+      </div>
+    );
+  }
+
   return (
-    <form className="personal__details__container" onSubmit={handleSubmit}>
+    <>
       <ToastContainer />
-      <div className="personal__details__single__line__container">
-        {/* Firstname Input */}
-        <div className="personal__details__single__input__container">
-          <label htmlFor="firstname" className="input__label">
-            Firstname <span>*</span>
-          </label>
-          <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            value={formData.firstname}
-            onChange={handleInputChange}
-            className="input"
-          />
-          {errors.firstname && (
-            <p className="input__error__message">{errors.firstname}</p>
-          )}
-        </div>
-        {/* Surname Input */}
-        <div className="personal__details__single__input__container">
-          <label htmlFor="surname" className="input__label">
-            Surname <span>*</span>
-          </label>
-          <input
-            type="text"
-            id="surname"
-            name="surname"
-            value={formData.surname}
-            onChange={handleInputChange}
-            className="input"
-          />
-          {errors.surname && (
-            <p className="input__error__message">{errors.surname}</p>
-          )}
-        </div>
-      </div>
-      <div className="personal__details__single__line__container">
-        {/* Email Address Input */}
-        <div className="personal__details__single__input__container">
-          <label htmlFor="email" className="input__label">
-            Email address <span>*</span>
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            className="input"
-          />
-          {errors.email && (
-            <p className="input__error__message">{errors.email}</p>
-          )}
-        </div>
-        {/* Phone Number Input */}
-        <div className="personal__details__single__input__container">
-          <label htmlFor="phone" className="input__label">
-            Phone number <span>*</span>
-          </label>
-          <input
-            type="number"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-            className="input"
-          />
-          {errors.phone && (
-            <p className="input__error__message">{errors.phone}</p>
-          )}
-        </div>
-      </div>
-      <div className="personal__details__single__line__container">
-        {/* Job Title Input */}
-        <div className="personal__details__single__input__container">
-          <label htmlFor="jobtitle" className="input__label">
-            Job title <span>*</span>
-          </label>
-          <input
-            type="text"
-            id="jobtitle"
-            name="jobtitle"
-            value={formData.jobtitle}
-            onChange={handleInputChange}
-            className="input"
-          />
-          {errors.jobtitle && (
-            <p className="input__error__message">{errors.jobtitle}</p>
-          )}
-        </div>
-        {/* Gender Select Input */}
-        <div className="personal__details__single__input__container">
-          <label htmlFor="gender" className="input__label">
-            Gender <span>*</span>
-          </label>
-          {formData?.gender?.value && (
-            <Select
-              className="basic-single"
-              classNamePrefix="select"
-              defaultValue={{
-                label: formData?.gender?.label,
-                value: formData?.gender?.value,
-              }}
-              isDisabled={isDisabled}
-              isLoading={isLoading}
-              isClearable={isClearable}
-              isRtl={isRtl}
-              isSearchable={isSearchable}
-              name="gender"
-              options={genders}
-              onChange={handleSelectChange}
+      <form className="personal__details__container" onSubmit={handleSubmit}>
+        <div className="personal__details__single__line__container">
+          {/* Firstname Input */}
+          <div className="personal__details__single__input__container">
+            <label htmlFor="firstname" className="input__label">
+              Firstname <span>*</span>
+            </label>
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              value={formData.firstname}
+              onChange={handleInputChange}
+              className="input"
             />
-          )}
-          {!formData.gender?.value && (
-            <Select
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={isDisabled}
-              isLoading={isLoading}
-              isClearable={isClearable}
-              isRtl={isRtl}
-              isSearchable={isSearchable}
-              name="gender"
-              options={genders}
-              onChange={handleSelectChange}
+            {errors.firstname && (
+              <p className="input__error__message">{errors.firstname}</p>
+            )}
+          </div>
+          {/* Surname Input */}
+          <div className="personal__details__single__input__container">
+            <label htmlFor="surname" className="input__label">
+              Surname <span>*</span>
+            </label>
+            <input
+              type="text"
+              id="surname"
+              name="surname"
+              value={formData.surname}
+              onChange={handleInputChange}
+              className="input"
             />
-          )}
-          {errors.gender && (
-            <p className="input__error__message">{errors.gender}</p>
-          )}
+            {errors.surname && (
+              <p className="input__error__message">{errors.surname}</p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="personal__details__single__line__container">
-        {/* Country Select Input */}
-        <div className="personal__details__single__input__container">
-          <label htmlFor="country" className="input__label">
-            Country <span>*</span>
-          </label>
-          {formData?.country?.value && (
-            <Select
-              className="basic-single"
-              classNamePrefix="select"
-              defaultValue={{
-                label: formData?.country?.value,
-                value: formData?.country?.value,
-              }}
-              isDisabled={isDisabled}
-              isLoading={isLoading}
-              isClearable={isClearable}
-              isRtl={isRtl}
-              isSearchable={isSearchable}
-              name="country"
-              options={colourOptions}
-              onChange={handleSelectChange}
+        <div className="personal__details__single__line__container">
+          {/* Email Address Input */}
+          <div className="personal__details__single__input__container">
+            <label htmlFor="email" className="input__label">
+              Email address <span>*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="input"
             />
-          )}
-          {!formData.country?.value && (
-            <Select
-              className="basic-single"
-              classNamePrefix="select"
-              isDisabled={isDisabled}
-              isLoading={isLoading}
-              isClearable={isClearable}
-              isRtl={isRtl}
-              isSearchable={isSearchable}
-              name="country"
-              options={colourOptions}
-              onChange={handleSelectChange}
+            {errors.email && (
+              <p className="input__error__message">{errors.email}</p>
+            )}
+          </div>
+          {/* Phone Number Input */}
+          <div className="personal__details__single__input__container">
+            <label htmlFor="phone" className="input__label">
+              Phone number <span>*</span>
+            </label>
+            <input
+              type="number"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              className="input"
             />
-          )}
-          {errors.country && (
-            <p className="input__error__message">{errors.country}</p>
-          )}
+            {errors.phone && (
+              <p className="input__error__message">{errors.phone}</p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="CTA__button__container personal__details__CTA__button__container">
-        <SectionCTA text={"Save"} handleClick={handleSubmit} />
-      </div>
-    </form>
+        <div className="personal__details__single__line__container">
+          {/* Job Title Input */}
+          <div className="personal__details__single__input__container">
+            <label htmlFor="jobtitle" className="input__label">
+              Job title <span>*</span>
+            </label>
+            <input
+              type="text"
+              id="jobtitle"
+              name="jobtitle"
+              value={formData.jobtitle}
+              onChange={handleInputChange}
+              className="input"
+            />
+            {errors.jobtitle && (
+              <p className="input__error__message">{errors.jobtitle}</p>
+            )}
+          </div>
+          {/* Gender Select Input */}
+          <div className="personal__details__single__input__container">
+            <label htmlFor="gender" className="input__label">
+              Gender <span>*</span>
+            </label>
+            {formData?.gender?.value && (
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                defaultValue={{
+                  label: formData?.gender?.label,
+                  value: formData?.gender?.value,
+                }}
+                isDisabled={isDisabled}
+                isLoading={isLoading}
+                isClearable={isClearable}
+                isRtl={isRtl}
+                isSearchable={isSearchable}
+                name="gender"
+                options={genders}
+                onChange={handleSelectChange}
+              />
+            )}
+            {!formData.gender?.value && (
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={isDisabled}
+                isLoading={isLoading}
+                isClearable={isClearable}
+                isRtl={isRtl}
+                isSearchable={isSearchable}
+                name="gender"
+                options={genders}
+                onChange={handleSelectChange}
+              />
+            )}
+            {errors.gender && (
+              <p className="input__error__message">{errors.gender}</p>
+            )}
+          </div>
+        </div>
+        <div className="personal__details__single__line__container">
+          {/* Country Select Input */}
+          <div className="personal__details__single__input__container">
+            <label htmlFor="country" className="input__label">
+              Country <span>*</span>
+            </label>
+            {formData?.country?.value && (
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                defaultValue={{
+                  label: formData?.country?.value,
+                  value: formData?.country?.value,
+                }}
+                isDisabled={isDisabled}
+                isLoading={isLoading}
+                isClearable={isClearable}
+                isRtl={isRtl}
+                isSearchable={isSearchable}
+                name="country"
+                options={colourOptions}
+                onChange={handleSelectChange}
+              />
+            )}
+            {!formData.country?.value && (
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                isDisabled={isDisabled}
+                isLoading={isLoading}
+                isClearable={isClearable}
+                isRtl={isRtl}
+                isSearchable={isSearchable}
+                name="country"
+                options={colourOptions}
+                onChange={handleSelectChange}
+              />
+            )}
+            {errors.country && (
+              <p className="input__error__message">{errors.country}</p>
+            )}
+          </div>
+        </div>
+        <div className="CTA__button__container personal__details__CTA__button__container">
+          <SectionCTA text={"Save"} handleClick={handleSubmit} />
+        </div>
+      </form>
+    </>
   );
 };
 
