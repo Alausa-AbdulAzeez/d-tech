@@ -33,6 +33,10 @@ const Profile = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     params.set("section", activeSection.profileIndex);
+
+    // Delete the 'exp_sub' parameter
+    params.delete("exp_sub");
+    params.delete("exp_id");
     navigate(`?${params.toString()}`, { replace: true });
   }, [activeSection, navigate]);
 
