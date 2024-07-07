@@ -17,11 +17,20 @@
   flex-direction: column;
   padding: 16px;
   gap: 24px;
+  width: 100%;
 }
 
 .single__work__history__right__content__top {
   display: flex;
   flex-direction: column;
+}
+.single__work__history__company__and__actions__container {
+  display: flex;
+  justify-content: space-between;
+}
+.single__work__history__actions__container {
+  display: flex;
+  gap: 8px;
 }
 
 .single__work__history__company__name {

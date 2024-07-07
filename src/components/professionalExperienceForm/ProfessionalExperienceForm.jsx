@@ -78,7 +78,7 @@ const ProfessionalExperienceForm = () => {
 
     // Update localStorage with new data
     localStorage.setItem(
-      "Professional experience m",
+      "Professional experience object",
       JSON.stringify({ ...formData, [name]: value })
     );
   };
@@ -88,7 +88,7 @@ const ProfessionalExperienceForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: selectedOption }));
     // Update localStorage with new data
     localStorage.setItem(
-      "Professional experience m",
+      "Professional experience object",
       JSON.stringify({ ...formData, [name]: selectedOption })
     );
   };
