@@ -1,6 +1,8 @@
 :root {
   --off-white: #ffffff;
   --blue-100: #006aff;
+  --blue-70: rgba(0, 106, 255, 0.799);
+  /* --blue-70: rgba(0, 106, 255, 0.744); */
   --blue-20: #e3eaff;
   --neutral-bg: #f3f4f6;
   --light-border-color: rgb(232, 234, 238);

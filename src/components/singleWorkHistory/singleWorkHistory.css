@@ -1,0 +1,71 @@
+.single__work__history__container {
+  display: flex;
+  height: auto;
+  overflow-y: auto;
+  border: 1px solid var(--light-border-color);
+  border-left: none;
+  border-radius: 8px;
+  gap: 16px;
+}
+
+.single__work__history__left__border {
+  min-width: 6px;
+  background: var(--blue-100);
+}
+.single__work__history__right__content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 24px;
+}
+
+.single__work__history__right__content__top {
+  display: flex;
+  flex-direction: column;
+}
+
+.single__work__history__company__name {
+  font-weight: 600;
+  color: var(--blue-70);
+  font-size: 16px;
+}
+.single__work__history__title__location__duration {
+  font-size: 12px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.vertical__divider {
+  width: 1.5px;
+  background: darkgray;
+  height: 14px;
+}
+
+.single__work__history__duration {
+  display: flex;
+}
+
+.to__span {
+  margin: 0 4px;
+}
+
+.multiple__skills__wrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.single__skill__container {
+  padding: 4px 12px;
+  background: var(--neutral-bg);
+  white-space: nowrap; /* Prevents the text from wrapping to the next line */
+  overflow: hidden; /* Ensures that the content that overflows is not visible */
+  text-overflow: ellipsis; /* Adds the ellipsis (...) */
+  max-width: 300px;
+}
+
+.single__work__history__right__content__bottom {
+  color: black;
+  font-size: 14px;
+  font-weight: 300;
+}

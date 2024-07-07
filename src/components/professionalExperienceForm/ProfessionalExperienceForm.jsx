@@ -2,15 +2,23 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./professionalExperienceForm.css";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import { SectionCTA, SingleWorkHistory } from "../index";
+import { arrowDown, ghost } from "../../assets/images";
 
 const ProfessionalExperienceForm = () => {
-  const professionalExperience = [
-    { id: 1, title: "Experience 1" },
-    { id: 2, title: "Experience 2" },
-  ];
-
   const location = useLocation();
   const navigate = useNavigate();
+
+  const [professionalExperience, setProfessionalExperience] = useState([]);
+
+  useEffect(() => {
+    const storedProfessionalExperience = JSON.parse(
+      localStorage.getItem("Professional experience")
+    );
+    if (storedProfessionalExperience) {
+      setProfessionalExperience(storedProfessionalExperience);
+    }
+  }, []);
 
   const getSectionFromQuery = () => {
     const params = new URLSearchParams(location.search);
@@ -50,9 +58,11 @@ const ProfessionalExperienceForm = () => {
     navigate(newUrl, { replace: true });
   };
 
+  console.log(activeSection);
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    if (activeSection === "add") {
+    if (activeSection === "new") {
       params.set("exp_sub", activeSection);
       navigate(`?${params}`, { replace: true });
     } else if (activeSection === "edit") {
@@ -61,29 +71,55 @@ const ProfessionalExperienceForm = () => {
     }
   }, [activeSection, navigate]);
 
-  console.log(activeSection);
-
   return (
     <div className="professional__experience__form__container">
+      {!professionalExperience.length > 0 && !activeSection && (
+        <div className="no__professional__experience__container">
+          <img
+            src={ghost}
+            alt="no resume"
+            className="ghost__image__no__professional__experience"
+          />
+          <h4 className="no__professional__experience__text">
+            No professional experience!
+          </h4>
+          <p className="click__button__to__upload__text">
+            Click the button below to add
+          </p>
+          <img
+            src={arrowDown}
+            alt="arrow down"
+            className="click__upload__button__arrow__pointer bounce"
+          />
+          <SectionCTA
+            text={"Add experience"}
+            handleClick={() => handleSubSectionNav("new")}
+          />
+        </div>
+      )}
+
       {!allowedSubs.includes(activeSection) && (
         <>
-          <button
-            className="add__new__experience__button"
-            onClick={() => handleSubSectionNav("new")}
-          >
-            Add new experience
-          </button>
+          {professionalExperience.length > 0 && (
+            <button
+              className="add__new__experience__button"
+              onClick={() => handleSubSectionNav("new")}
+            >
+              Add new experience
+            </button>
+          )}
 
           {professionalExperience.map((singleExperience) => {
             return (
-              <div className="" key={singleExperience.id}>
-                <div className="">{singleExperience.title}</div>
-                <button
-                  onClick={() => handleSubSectionNav(`edit`, singleExperience)}
-                >
-                  Edit
-                </button>
-              </div>
+              // <div className="" key={singleExperience.id}>
+              //   <div className="">{singleExperience.title}</div>
+              //   <button
+              //     onClick={() => handleSubSectionNav(`edit`, singleExperience)}
+              //   >
+              //     Edit
+              //   </button>
+              // </div>
+              <SingleWorkHistory />
             );
           })}
         </>

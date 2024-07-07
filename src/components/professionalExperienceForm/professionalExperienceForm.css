@@ -5,6 +5,30 @@
   gap: 24px;
 }
 
+.no__professional__experience__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.no__professional__experience__text {
+  font-size: 14px;
+}
+
+.ghost__image__no__professional__experience {
+  width: 150px;
+  height: auto;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.click__upload__button__arrow__pointer {
+  height: 30px;
+  margin: 12px 0px;
+}
+
 .add__new__experience__button {
   border: none;
   transition: all ease-in-out 160ms;

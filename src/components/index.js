@@ -7,6 +7,7 @@ import NavButton from "./navButton/NavButton";
 import SectionCTA from "./sectionCTA/SectionCTA";
 import SkillsAndTools from "./skillsAndTools/SkillsAndTools";
 import LoadingComponent from "./loadingComponent/LoadingComponent";
+import SingleWorkHistory from "./singleWorkHistory/SingleWorkHistory";
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   SectionCTA,
   SkillsAndTools,
   LoadingComponent,
+  SingleWorkHistory,
 };
