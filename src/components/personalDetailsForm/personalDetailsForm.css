@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-between;
   gap: 24px;
+  flex-direction: column;
 }
 .personal__details__single__input__container {
   /* width: 48%; */
@@ -20,4 +21,15 @@
 
 .personal__details__CTA__button__container {
   width: 100%;
+}
+
+/* Styles for tablets and larger screens */
+@media (min-width: 768px) {
+  .personal__details__single__line__container {
+    flex-direction: row;
+  }
+}
+
+/* Styles for desktops and larger screens */
+@media (min-width: 1024px) {
 }

@@ -82,6 +82,5 @@ const SingleWorkHistory = ({
 export default SingleWorkHistory;
 
 const SingleSkill = ({ title }) => {
-  console.log(title);
   return <div className="single__skill__container">{title}</div>;
 };

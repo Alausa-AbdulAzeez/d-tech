@@ -19,7 +19,6 @@ const Overlay = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   const handleClick = (e) => {
-    console.log(e);
     // Check if the click target is the overlay background
     if (e.target.classList.contains("overlayy")) {
       onClose();
