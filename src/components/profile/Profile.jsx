@@ -62,13 +62,13 @@ const Profile = () => {
           localStorage.getItem("Personal details")
         );
         if (
-          storedPersonalDetails.firstname &&
-          storedPersonalDetails.surname &&
-          storedPersonalDetails.email &&
-          storedPersonalDetails.phone &&
-          storedPersonalDetails.jobtitle &&
-          storedPersonalDetails.gender &&
-          storedPersonalDetails.country
+          storedPersonalDetails?.firstname &&
+          storedPersonalDetails?.surname &&
+          storedPersonalDetails?.email &&
+          storedPersonalDetails?.phone &&
+          storedPersonalDetails?.jobtitle &&
+          storedPersonalDetails?.gender &&
+          storedPersonalDetails?.country
         ) {
           state = true;
         } else {
@@ -79,7 +79,7 @@ const Profile = () => {
         const storedSkillsAndTools = JSON.parse(
           localStorage.getItem("Skills & Tools")
         );
-        if (storedSkillsAndTools.primarySkills.length > 0) {
+        if (storedSkillsAndTools?.primarySkills?.length > 0) {
           state = true;
         } else {
           state = false;
@@ -89,7 +89,7 @@ const Profile = () => {
         const storedProfessionalExperience = JSON.parse(
           localStorage.getItem("Professional experience")
         );
-        if (storedProfessionalExperience.length > 0) {
+        if (storedProfessionalExperience?.length > 0) {
           state = true;
         } else {
           state = false;
