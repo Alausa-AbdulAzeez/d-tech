@@ -1,4 +1,3 @@
-import React from "react";
 import { bouncingCircles } from "../../assets/images";
 
 const LoadingComponent = ({ style }) => {

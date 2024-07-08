@@ -1,4 +1,3 @@
-import { ToastContainer } from "react-toastify";
 import { Navbar, Profile } from "../../components";
 import "./home.css";
 import { createContext, useState } from "react";

@@ -8,11 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 const SkillsAndTools = ({ setCompletionStatus }) => {
   // State variables to control the Select component properties
   const [isClearable, setIsClearable] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(true);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true); // Set initial loading state to true
-  const [isRtl, setIsRtl] = useState(false);
 
   // State variables to hold form data
   const [formData, setFormData] = useState({
@@ -131,11 +127,7 @@ const SkillsAndTools = ({ setCompletionStatus }) => {
             classNamePrefix="select"
             isMulti
             value={formData.primarySkills}
-            isDisabled={isDisabled}
-            isLoading={isLoading}
             isClearable={isClearable}
-            isRtl={isRtl}
-            isSearchable={isSearchable}
             name="primarySkills"
             options={primarySkills}
             onChange={handleSelectChange}
@@ -155,11 +147,7 @@ const SkillsAndTools = ({ setCompletionStatus }) => {
             classNamePrefix="select"
             isMulti
             value={formData.secondarySkills}
-            isDisabled={isDisabled}
-            isLoading={isLoading}
             isClearable={isClearable}
-            isRtl={isRtl}
-            isSearchable={isSearchable}
             name="secondarySkills"
             options={secondarySkills}
             onChange={handleSelectChange}
@@ -176,11 +164,7 @@ const SkillsAndTools = ({ setCompletionStatus }) => {
             classNamePrefix="select"
             isMulti
             value={formData.tools}
-            isDisabled={isDisabled}
-            isLoading={isLoading}
             isClearable={isClearable}
-            isRtl={isRtl}
-            isSearchable={isSearchable}
             name="tools"
             options={tools}
             onChange={handleSelectChange}

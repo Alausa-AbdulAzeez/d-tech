@@ -6,16 +6,12 @@ import Select from "react-select";
 import {
   DeleteConfirmation,
   LoadingComponent,
-  MainProfessionalExperienceForm,
   Overlay,
   SectionCTA,
   SingleWorkHistory,
 } from "../index";
 import { arrowDown, ghost } from "../../assets/images";
 import ReactQuill from "react-quill";
-import DatePicker from "react-datepicker";
-import { setYear, setMonth } from "date-fns";
-import "react-datepicker/dist/react-datepicker.css";
 import "react-quill/dist/quill.snow.css"; // import styles
 import { ToastContainer, toast } from "react-toastify";
 
@@ -34,11 +30,6 @@ const ProfessionalExperienceForm = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   // State variables to control the Select component properties
-  const [isClearable, setIsClearable] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(true);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isRtl, setIsRtl] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true); // Set initial loading state to true
 
   // State variables to hold form data
@@ -116,54 +107,6 @@ const ProfessionalExperienceForm = () => {
   };
 
   // Handle form submission
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (validateForm()) {
-  //     toast.success("Form saved successfully", {
-  //       position: "top-center",
-  //       autoClose: 2500,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "light",
-  //     });
-  //     // Save experience to local storage
-  //     const storedProfessionalExperience =
-  //       JSON.parse(localStorage.getItem("Professional experience")) || [];
-
-  //       const newExperience = {
-  //       jobRole: formData.jobRole,
-  //       employer: formData.employer,
-  //       country: formData.country,
-  //       cityStateProvince: formData.cityStateProvince,
-  //       startDate: formData.startDate,
-  //       endDate: formData.endDate,
-  //       skills: formData.skills,
-  //       jobDescription: formData.jobDescription,
-  //     };
-  //     storedProfessionalExperience.push(newExperience);
-  //     localStorage.setItem(
-  //       "Professional experience",
-  //       JSON.stringify(storedProfessionalExperience)
-  //     );
-
-  //     // Reset the form
-  //     setFormData({
-  //       jobRole: "",
-  //       employer: "",
-  //       country: null,
-  //       cityStateProvince: "",
-  //       startDate: null,
-  //       endDate: null,
-  //       skills: [],
-  //       jobDescription: "",
-  //     });
-  //   } else {
-  //     console.log("Form has errors");
-  //   }
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -581,18 +524,6 @@ const ProfessionalExperienceForm = () => {
             </form>
           </div>
         )}
-        {/* {activeSection === "edit" && (
-          <div className="sub__section__container">
-            <div
-              className="back__nav__wrapper"
-              onClick={() => handleBackClick("goBack")}
-            >
-              <Icon icon="ion:chevron-back-outline" />
-              <div className="">Back</div>
-            </div>
-
-          </div>
-        )} */}
       </div>
     </>
   );

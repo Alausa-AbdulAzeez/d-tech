@@ -1,4 +1,3 @@
-import React from "react";
 import "./profileSectionCard.css";
 import { Icon } from "@iconify/react";
 

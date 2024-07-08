@@ -1,5 +1,4 @@
 import { Icon } from "@iconify/react";
-import React from "react";
 import "./deleteConfirmation.css";
 
 const DeleteConfirmation = ({ onClose, handleDelete, selectedItemIndex }) => {

@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import "./personalDetailsForm.css";
 import Select from "react-select";
-import SectionCTA from "../sectionCTA/SectionCTA";
 import { ToastContainer, toast } from "react-toastify";
-import LoadingComponent from "../loadingComponent/LoadingComponent";
+import { LoadingComponent, SectionCTA } from "../index";
 import { UserContext } from "../../pages/home/Home";
 
 /**

@@ -49,30 +49,8 @@ const Profile = () => {
       ...prevStatus,
       [sectionTitle]: isComplete,
     }));
-
-    // localStorage.setItem(
-    //   "completionStatus",
-    //   JSON.stringify({
-    //     ...completionStatus,
-    //     [sectionTitle]: isComplete,
-    //   })
-    // );
   };
 
-  // useEffect(()=>{
-  //   const storedCompletionStatus = JSON.parse(
-  //     localStorage.getItem("completionStatus")
-  //   );
-  //   if (storedCompletionStatus) {
-  //     setSelectedResume(storedResume);
-  //     setResume(true);
-  //     setCompletionStatus(true);
-  //   } else {
-  //     setCompletionStatus(false);
-  //   }
-  // },[])
-
-  // Function to check the complete state of a section
   const checkCompleteState = (title) => {
     let state;
     switch (title) {
