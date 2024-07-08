@@ -24,6 +24,8 @@ const ProfessionalExperienceForm = () => {
   const navigate = useNavigate();
 
   const [professionalExperience, setProfessionalExperience] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
 
   // State variables to hold error messages
   const [errors, setErrors] = useState({});
@@ -114,9 +116,75 @@ const ProfessionalExperienceForm = () => {
   };
 
   // Handle form submission
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (validateForm()) {
+  //     toast.success("Form saved successfully", {
+  //       position: "top-center",
+  //       autoClose: 2500,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //     // Save experience to local storage
+  //     const storedProfessionalExperience =
+  //       JSON.parse(localStorage.getItem("Professional experience")) || [];
+
+  //       const newExperience = {
+  //       jobRole: formData.jobRole,
+  //       employer: formData.employer,
+  //       country: formData.country,
+  //       cityStateProvince: formData.cityStateProvince,
+  //       startDate: formData.startDate,
+  //       endDate: formData.endDate,
+  //       skills: formData.skills,
+  //       jobDescription: formData.jobDescription,
+  //     };
+  //     storedProfessionalExperience.push(newExperience);
+  //     localStorage.setItem(
+  //       "Professional experience",
+  //       JSON.stringify(storedProfessionalExperience)
+  //     );
+
+  //     // Reset the form
+  //     setFormData({
+  //       jobRole: "",
+  //       employer: "",
+  //       country: null,
+  //       cityStateProvince: "",
+  //       startDate: null,
+  //       endDate: null,
+  //       skills: [],
+  //       jobDescription: "",
+  //     });
+  //   } else {
+  //     console.log("Form has errors");
+  //   }
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
+      const storedProfessionalExperience =
+        JSON.parse(localStorage.getItem("Professional experience")) || [];
+
+      if (isEditing) {
+        storedProfessionalExperience[editIndex] = formData;
+        setIsEditing(false);
+        setEditIndex(null);
+      } else {
+        storedProfessionalExperience.push(formData);
+      }
+
+      localStorage.setItem(
+        "Professional experience",
+        JSON.stringify(storedProfessionalExperience)
+      );
+
+      setProfessionalExperience(storedProfessionalExperience);
+
       toast.success("Form saved successfully", {
         position: "top-center",
         autoClose: 2500,
@@ -127,24 +195,6 @@ const ProfessionalExperienceForm = () => {
         progress: undefined,
         theme: "light",
       });
-      // Save experience to local storage
-      const storedProfessionalExperience =
-        JSON.parse(localStorage.getItem("Professional experience")) || [];
-      const newExperience = {
-        jobRole: formData.jobRole,
-        employer: formData.employer,
-        country: formData.country,
-        cityStateProvince: formData.cityStateProvince,
-        startDate: formData.startDate,
-        endDate: formData.endDate,
-        skills: formData.skills,
-        jobDescription: formData.jobDescription,
-      };
-      storedProfessionalExperience.push(newExperience);
-      localStorage.setItem(
-        "Professional experience",
-        JSON.stringify(storedProfessionalExperience)
-      );
 
       // Reset the form
       setFormData({
@@ -157,6 +207,10 @@ const ProfessionalExperienceForm = () => {
         skills: [],
         jobDescription: "",
       });
+
+      if (activeSection === "edit") {
+        handleBackClick();
+      }
     } else {
       console.log("Form has errors");
     }
@@ -213,6 +267,8 @@ const ProfessionalExperienceForm = () => {
   // Function to handle editing a work history entry
   const handleEditExperience = (index) => {
     const experienceToEdit = professionalExperience[index];
+    setIsEditing(true);
+    setEditIndex(index);
     setFormData({
       jobRole: experienceToEdit.jobRole,
       employer: experienceToEdit.employer,
