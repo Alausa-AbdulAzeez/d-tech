@@ -65,6 +65,7 @@ const ProfessionalExperienceForm = () => {
     { value: "Zimbabwe", label: "Zim", code: "ZW" },
   ];
 
+  // Function to handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value.trim() }));
@@ -80,7 +81,9 @@ const ProfessionalExperienceForm = () => {
       JSON.stringify({ ...formData, [name]: value })
     );
   };
+  // End of function to handle input change
 
+  // Function to select input change
   const handleSelectChange = (selectedOption, action) => {
     const { name } = action;
     setFormData((prevData) => ({ ...prevData, [name]: selectedOption }));
@@ -90,6 +93,7 @@ const ProfessionalExperienceForm = () => {
       JSON.stringify({ ...formData, [name]: selectedOption })
     );
   };
+  // End of function to select input change
 
   // Validate form inputs and set error messages
   const validateForm = () => {
@@ -113,6 +117,7 @@ const ProfessionalExperienceForm = () => {
       const storedProfessionalExperience =
         JSON.parse(localStorage.getItem("Professional experience")) || [];
 
+      // If in editing mode, update existing item, else push item to existing array
       if (isEditing) {
         storedProfessionalExperience[editIndex] = formData;
         setIsEditing(false);
@@ -121,6 +126,7 @@ const ProfessionalExperienceForm = () => {
         storedProfessionalExperience.push(formData);
       }
 
+      // Update local storage
       localStorage.setItem(
         "Professional experience",
         JSON.stringify(storedProfessionalExperience)
@@ -168,25 +174,32 @@ const ProfessionalExperienceForm = () => {
     }
   }, []);
 
+  // Function to get current query from URL
   const getSectionFromQuery = () => {
     const params = new URLSearchParams(location.search);
     const subSectionId = params.get("exp_sub");
     return subSectionId || null;
   };
 
+  // End of function to get current query from URL
+
+  // Allowed sub sections
   const allowedSubs = ["new", "edit"];
 
   const [activeSection, setActiveSection] = useState(getSectionFromQuery);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 
+  // Function to handle sub section switch
   const handleSubSectionNav = (section, data) => {
     if (section === "edit") {
       setSelectedItem(data);
     }
     setActiveSection(section);
   };
+  // End of function to handle sub section switch
 
+  // Function to leave sub section
   const handleBackClick = () => {
     // Create a URLSearchParams object from the current URL search parameters
     const searchParams = new URLSearchParams(location.search);
@@ -206,6 +219,7 @@ const ProfessionalExperienceForm = () => {
     // Use navigate to update the URL
     navigate(newUrl, { replace: true });
   };
+  // End of function to leave sub section
 
   // Function to handle editing a work history entry
   const handleEditExperience = (index) => {

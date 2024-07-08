@@ -17,6 +17,7 @@ const SingleWorkHistory = ({
     skills,
   } = singleExperience;
 
+  // Function to render item as HTML
   const renderHTML = (htmlString) => {
     return { __html: htmlString };
   };

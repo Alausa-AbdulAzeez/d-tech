@@ -5,8 +5,10 @@ import { UserContext } from "../../pages/home/Home";
 const Navbar = () => {
   const { userDetails } = useContext(UserContext);
 
+  // Initialize variables
   let firstname, surname, jobtitle;
 
+  // Destructure variables when "userDetails" exists
   if (userDetails) {
     ({ firstname, surname, jobtitle } = userDetails);
   }

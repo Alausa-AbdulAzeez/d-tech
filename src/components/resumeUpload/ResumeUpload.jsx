@@ -21,6 +21,7 @@ const ResumeUpload = ({ setCompletionStatus }) => {
     }
   }, []);
 
+  // Function to handle file change
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const allowedExtensions = [".pdf", ".doc", ".docx"];
@@ -65,7 +66,9 @@ const ResumeUpload = ({ setCompletionStatus }) => {
 
     event.target.value = null;
   };
+  // End of function to handle file change
 
+  // Function to remove file
   const removeFile = () => {
     setResume(false);
     setSelectedResume(null);
@@ -82,6 +85,8 @@ const ResumeUpload = ({ setCompletionStatus }) => {
       theme: "light",
     });
   };
+
+  // End of function to remove file
 
   // Function to handle resume upload
   const uploadResume = () => {

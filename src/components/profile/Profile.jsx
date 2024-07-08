@@ -21,11 +21,13 @@ const Profile = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Function to get current section from URL
   const getSectionFromQuery = () => {
     const params = new URLSearchParams(location.search);
     const sectionIndex = params.get("section");
     return profileSections[sectionIndex - 1] || profileSections[0];
   };
+  // End of function to get current section from URL
 
   const [activeSection, setActiveSection] = useState(getSectionFromQuery);
   const [completionStatus, setCompletionStatus] = useState({});
@@ -40,9 +42,12 @@ const Profile = () => {
     navigate(`?${params.toString()}`, { replace: true });
   }, [activeSection, navigate]);
 
+  // Function to make a section active
   const handleSectionClick = (section) => {
     setActiveSection(section);
   };
+
+  // End of function to make a section active
 
   const setSectionCompletion = (sectionTitle, isComplete) => {
     setCompletionStatus((prevStatus) => ({
@@ -50,6 +55,8 @@ const Profile = () => {
       [sectionTitle]: isComplete,
     }));
   };
+
+  // Function to check the complete state of a section
 
   const checkCompleteState = (title) => {
     let state;
