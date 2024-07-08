@@ -21,7 +21,7 @@ This project is a web application designed to help users create and manage their
 
 ## Demo
 
-Provide a link to the live demo or screenshots of the application here.
+[Live demo link](https://d-tech-inky.vercel.app/)
 
 ## Installation
 
