@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import Select from "react-select";
 import {
+  DeleteConfirmation,
   LoadingComponent,
   MainProfessionalExperienceForm,
+  Overlay,
   SectionCTA,
   SingleWorkHistory,
 } from "../index";
@@ -25,6 +27,9 @@ const ProfessionalExperienceForm = () => {
 
   // State variables to hold error messages
   const [errors, setErrors] = useState({});
+
+  // State for user details modal visibility
+  const [isOpen, setIsOpen] = useState(false);
 
   // State variables to control the Select component properties
   const [isClearable, setIsClearable] = useState(true);
@@ -176,6 +181,7 @@ const ProfessionalExperienceForm = () => {
 
   const [activeSection, setActiveSection] = useState(getSectionFromQuery);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 
   const handleSubSectionNav = (section, data) => {
     if (section === "edit") {
@@ -203,6 +209,59 @@ const ProfessionalExperienceForm = () => {
     // Use navigate to update the URL
     navigate(newUrl, { replace: true });
   };
+
+  // Function to handle editing a work history entry
+  const handleEditExperience = (index) => {
+    const experienceToEdit = professionalExperience[index];
+    setFormData({
+      jobRole: experienceToEdit.jobRole,
+      employer: experienceToEdit.employer,
+      country: experienceToEdit.country,
+      cityStateProvince: experienceToEdit.cityStateProvince,
+      startDate: experienceToEdit.startDate,
+      endDate: experienceToEdit.endDate,
+      skills: experienceToEdit.skills,
+      jobDescription: experienceToEdit.jobDescription,
+    });
+    handleSubSectionNav("edit", { id: index });
+  };
+
+  // Function to handle deleting a work history entry
+  const handleDeleteExperience = (index) => {
+    const updatedExperience = professionalExperience.filter(
+      (_, i) => i !== index
+    );
+    setProfessionalExperience(updatedExperience);
+    localStorage.setItem(
+      "Professional experience",
+      JSON.stringify(updatedExperience)
+    );
+    toast.success("Item successfully deleted", {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+    handleClose();
+  };
+
+  //   Function to close user modal
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  //   End of function to close user modal
+
+  //   Function to close user modal
+  const handleModalOpen = (index) => {
+    setSelectedItemIndex(index);
+    setIsOpen(true);
+  };
+  //   End of function to close user modal
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -232,6 +291,13 @@ const ProfessionalExperienceForm = () => {
 
   return (
     <>
+      <Overlay isOpen={isOpen} onClose={handleClose}>
+        <DeleteConfirmation
+          onClose={handleClose}
+          handleDelete={handleDeleteExperience}
+          selectedItemIndex={selectedItemIndex}
+        />
+      </Overlay>
       <ToastContainer />
       <div className="professional__experience__form__container">
         {!professionalExperience.length > 0 && !activeSection && (
@@ -274,14 +340,17 @@ const ProfessionalExperienceForm = () => {
               return (
                 <SingleWorkHistory
                   singleExperience={singleExperience}
+                  handleEdit={handleEditExperience}
                   key={index}
+                  index={index}
+                  setIsOpen={() => handleModalOpen(index)}
                 />
               );
             })}
           </>
         )}
 
-        {activeSection === "new" && (
+        {(activeSection === "new" || activeSection === "edit") && (
           <div className="sub__section__container">
             <div
               className="back__nav__wrapper"
@@ -456,7 +525,7 @@ const ProfessionalExperienceForm = () => {
             </form>
           </div>
         )}
-        {activeSection === "edit" && (
+        {/* {activeSection === "edit" && (
           <div className="sub__section__container">
             <div
               className="back__nav__wrapper"
@@ -466,9 +535,8 @@ const ProfessionalExperienceForm = () => {
               <div className="">Back</div>
             </div>
 
-            {/* <MainProfessionalExperienceForm type={"Edit"} /> */}
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

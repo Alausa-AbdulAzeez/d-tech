@@ -9,6 +9,8 @@ import SkillsAndTools from "./skillsAndTools/SkillsAndTools";
 import LoadingComponent from "./loadingComponent/LoadingComponent";
 import SingleWorkHistory from "./singleWorkHistory/SingleWorkHistory";
 import MainProfessionalExperienceForm from "./mainProfessionalExperienceForm/MainProfessionalExperienceForm";
+import Overlay from "./overlay/Overlay";
+import DeleteConfirmation from "./deleteConfirmation/DeleteConfirmation";
 
 export {
   Navbar,
@@ -22,4 +24,6 @@ export {
   LoadingComponent,
   SingleWorkHistory,
   MainProfessionalExperienceForm,
+  DeleteConfirmation,
+  Overlay,
 };

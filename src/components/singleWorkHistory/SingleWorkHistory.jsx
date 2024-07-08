@@ -1,6 +1,11 @@
 import "./singleWorkHistory.css";
 import { Icon } from "@iconify/react";
-const SingleWorkHistory = ({ singleExperience }) => {
+const SingleWorkHistory = ({
+  singleExperience,
+  handleEdit,
+  index,
+  setIsOpen,
+}) => {
   const {
     cityStateProvince,
     country,
@@ -29,12 +34,14 @@ const SingleWorkHistory = ({ singleExperience }) => {
                 icon="carbon:pen"
                 color="#006aff"
                 style={{ cursor: "pointer" }}
+                onClick={() => handleEdit(index)}
               />{" "}
               {/**Edit icon */}
               <Icon
                 icon="ion:trash-sharp"
                 color="#F04037"
                 style={{ cursor: "pointer" }}
+                onClick={() => setIsOpen(true)}
               />{" "}
               {/**Delete icon */}
             </div>
